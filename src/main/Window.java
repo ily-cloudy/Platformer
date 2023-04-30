@@ -10,7 +10,7 @@ public class Window {
     public Window(Panel game_panel) {
         // frame set-up
         frame = new JFrame();
-        frame.setSize(400, 400);
+        frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // adds panel into window object 
         frame.add(game_panel);
