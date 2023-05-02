@@ -27,7 +27,7 @@ public class Panel extends JPanel {
 
     // position variables and framerate
     private float x = 100;
-    private float y = 200;
+    private float y = 400;
 
     // images and animations
     private BufferedImage img;
