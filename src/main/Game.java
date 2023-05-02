@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 import entities.Player;
+import environments.EnvManager;
 
 public class Game implements Runnable {
 
@@ -12,6 +13,16 @@ public class Game implements Runnable {
     private final int UPS_SET = 120;
 
     private Player player;
+    private EnvManager env_manager;
+
+    public final static int TILES_DEFAULT_SIZE = 16;
+    public final static float SCALE = 4.0f;
+    public final static int TILES_WIDTH = 26;
+    public final static int TILES_HEIGHT = 14;
+    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+
+    public final static int GAME_WIDTH = TILES_SIZE * TILES_WIDTH;
+    public final static int GAME_HEIGHT = TILES_SIZE * TILES_HEIGHT;
 
     // constuctor method; basically __init__() in py
     public Game() {
@@ -28,6 +39,7 @@ public class Game implements Runnable {
 
     private void initEntities() {
         player = new Player(200, 200);
+        env_manager = new EnvManager(this);
     }
 
     // thread method oh no
@@ -38,9 +50,11 @@ public class Game implements Runnable {
 
     public void update() {
         player.update();
+        env_manager.update();
     }
 
     public void render(Graphics g) {
+        env_manager.draw(g);
         player.render(g);
     }
 
@@ -95,6 +109,10 @@ public class Game implements Runnable {
 			}
 		}
 	}
+
+    public void windowFocusLost() {
+        player.resetBooleans();
+    }
 
     public Player getPlayer() {
         return player;

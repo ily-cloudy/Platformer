@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
+
+import utility.LoadSave;
+
 import java.util.HashMap;
 
 import static utility.Parameters.Directions.*;
@@ -17,8 +20,9 @@ public class Player extends Entity{
     HashMap<String, BufferedImage[]> ani_map = new HashMap<>();
 
     private String player_action = "run";
-    private int player_dircection = -1;
     private boolean moving = false;
+    private boolean left, up, right, down;
+    private float player_speed = 2.0f;
 
     public Player(float x, float y) {
         super(x, y);
@@ -27,9 +31,10 @@ public class Player extends Entity{
 
     public void update() {
 
+        changePosition();
         updateAnimationTick();
         setAnimation();
-        changePosition();
+        
 
     }
 
@@ -43,14 +48,6 @@ public class Player extends Entity{
 
     }
 
-    public void setDirection(int direction) {
-        this.player_dircection = direction;
-        moving = true;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
 
     // continously iterates through animation arrays at a fixed speed
     private void updateAnimationTick() {
@@ -77,31 +74,32 @@ public class Player extends Entity{
     } 
 
     private void changePosition() {
-        if (moving) {
-            switch(player_dircection) {
-                case left:
-                    x -= 3;
-                    break;
-                case up:
-                    y -= 3;
-                    break;
-                case right:
-                    x += 3;
-                    break;
-                case down:
-                    y += 3;
-                    break;
-            }
+       
+        moving = false;
+
+        if (left && !right) {
+            x -= player_speed;
+            moving = true;
+        } 
+        else if (right && !left) {
+            x += player_speed;
+            moving = true;
+        }
+
+        if (up && !down) {
+            y -= player_speed;
+            moving = true;
+        }
+        else if (down && !up) {
+            y += player_speed;
+            moving = true; 
         }
     }
 
     private void loadAnimations() {
-        // reads image sprite
-        try {
-            img = ImageIO.read(new File("res/satyr-Sheet.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        // loads player sprites
+        img = LoadSave.GetSpriteSheet(LoadSave.SPRITES_PLAYER);
 
         // idle animation: 6 frames
         BufferedImage[] ani_idle = new BufferedImage[6];
@@ -121,4 +119,46 @@ public class Player extends Entity{
         
         ani_map.put("run", ani_run);
     }
+
+    // is called when widow focus is lost; stops player from continuing to move
+    public void resetBooleans() {
+        left = false;
+        right = false;
+        down = false;
+        up = false;
+
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public void setLeft(boolean left) {
+        this.left = left;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public void setRight(boolean right) {
+        this.right = right;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public void setDown(boolean down) {
+        this.down = down;
+    }
+
 }
