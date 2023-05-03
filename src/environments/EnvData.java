@@ -3,18 +3,19 @@ package environments;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Env1 {
+public class EnvData {
     
-    Map<int[], String> layout = new HashMap<>();
+    public static Map<int[], String> layout;
 
-    public Env1() {
+    public static void env1() {
+
+        layout = new HashMap<int[], String>();
+
         // row 14 
         layout.put(new int[]{0,13},"dark 1x1");
-        layout.put(new int[]{1,13},"dark 1x1");
-        layout.put(new int[]{2,13},"dark 1x1");
+        layout.put(new int[]{1,13},"orange rect 2x1");
         layout.put(new int[]{3,13},"dark 1x1");
-        layout.put(new int[]{4,13},"dark 1x1");
-        layout.put(new int[]{5,13},"dark 1x1");
+        layout.put(new int[]{4,13},"grass 2x1");
         layout.put(new int[]{6,13},"dark 1x1");
         layout.put(new int[]{7,13},"dark 1x1");
         layout.put(new int[]{8,13},"dark 1x1");

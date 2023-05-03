@@ -14,7 +14,7 @@ public class EnvManager {
     private int dim_x, dim_y;
     private String sprite = "spikes up2 1x1";
 
-    private Env1 env1;
+    private EnvData envdata;
     private Game game;
 //  private BufferedImage env_sprite;
     HashMap<String, BufferedImage> env_sprite_map = new HashMap<>();
@@ -24,7 +24,14 @@ public class EnvManager {
         this.game = game;
 //      env_sprite = LoadSave.GetSpriteSheet(LoadSave.SPRITES_ENVIRONMENT);
         importSprites();
+        EnvData.env1();
     }
+
+    private void importEnvData(EnvData envdata) {
+        this.envdata = envdata;
+        
+    }
+
 
     private void importSprites() {
         
@@ -101,15 +108,13 @@ public class EnvManager {
     }
     
     public void draw(Graphics g) {
-        System.out.println(env1.layout.entrySet());
-    
-//        env1.layout.forEach((k,v) -> {
-//            sprite = v;
-//            // automatic scaling constants
-  //          dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
-  //          dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));
-  //          g.drawImage(env_sprite_map.get(sprite), k[0], k[1], dim_x*4*16, dim_y*4*16, null);
-//        }); 
+        EnvData.layout.forEach((k,v) -> {
+            sprite = v;
+            // automatic scaling constants
+            dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
+            dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
+            g.drawImage(env_sprite_map.get(sprite), k[0]*16*4, k[1]*16*4, dim_x*4*16, dim_y*4*16, null);
+        }); 
 
         
     }
