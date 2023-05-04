@@ -34,7 +34,7 @@ public class Player extends Entity{
     public void update() {
 
         changePosition();
-        updateHitbox();
+//        updateHitbox();
         updateAnimationTick();
         setAnimation();
 
@@ -47,7 +47,7 @@ public class Player extends Entity{
         }
 
         g.drawImage(ani_map.get(player_action)[ani_index], (int) x, (int) y, 128, 128, null);
-        drawHitbox(g);
+//        drawHitbox(g);
 
     }
 

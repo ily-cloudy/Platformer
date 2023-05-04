@@ -26,11 +26,11 @@ public abstract class Entity {
 
     protected void drawHitbox (Graphics g) {
         g.setColor(Color.MAGENTA);
-        g.drawRect(hitbox.x, hitbox.y, 128, 128);
+        g.drawRect(hitbox.x+11*4, hitbox.y+11*4, hitbox.width, hitbox.height);
     }
 
     private void initHitbox() {
-        hitbox = new Rectangle((int)x, (int)y, 128, 128);
+        hitbox = new Rectangle((int)x, (int)y, width, height);
     }
     protected void updateHitbox() {
         hitbox.x = (int) x;

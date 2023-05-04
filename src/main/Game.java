@@ -40,7 +40,7 @@ public class Game implements Runnable {
 
     private void initEntities() {
         env_manager = new EnvManager(this);
-        player = new Player(200, 200, 128, 128);
+        player = new Player(200, 200, 48, 64);
         player.loadCollisionData(EnvData.collision_matrix);
     }
 

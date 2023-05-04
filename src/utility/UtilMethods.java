@@ -7,10 +7,10 @@ public class UtilMethods {
     public static boolean CanMoveHere(float x, float y, int width, int height, int[][] collision_data) {
 
         // forgive me for my sins
-        if (! IsSolid(x, y, collision_data)) {
-            if (! IsSolid(x + width, y + height, collision_data)) {
-                if (! IsSolid(x + width, y, collision_data)) {
-                    if (! IsSolid(x, y + height, collision_data)) {
+        if (! IsSolid(x+11*4, y+11*4, collision_data)) {
+            if (! IsSolid(x+11*4 + width, y+11*4 + height, collision_data)) {
+                if (! IsSolid(x+11*4 + width, y+11*4, collision_data)) {
+                    if (! IsSolid(x+11*4, y+11*4 + height, collision_data)) {
                         return true;
                     }
                 }
