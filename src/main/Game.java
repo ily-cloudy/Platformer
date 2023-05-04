@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 import entities.Player;
+import environments.EnvData;
 import environments.EnvManager;
 
 public class Game implements Runnable {
@@ -38,8 +39,9 @@ public class Game implements Runnable {
     }
 
     private void initEntities() {
-        player = new Player(200, 200);
         env_manager = new EnvManager(this);
+        player = new Player(200, 200, 128, 128);
+        player.loadCollisionData(EnvData.collision_matrix);
     }
 
     // thread method oh no

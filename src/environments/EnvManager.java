@@ -27,12 +27,6 @@ public class EnvManager {
         EnvData.env1();
     }
 
-    private void importEnvData(EnvData envdata) {
-        this.envdata = envdata;
-        
-    }
-
-
     private void importSprites() {
         
         // look i know this is a massive bodge but i was tired and it works
@@ -115,8 +109,6 @@ public class EnvManager {
             dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
             g.drawImage(env_sprite_map.get(sprite), k[0]*16*4, k[1]*16*4, dim_x*4*16, dim_y*4*16, null);
         }); 
-
-        
     }
 
     public void update() {
