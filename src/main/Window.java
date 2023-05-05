@@ -24,8 +24,8 @@ public class Window {
         
         // WHY IS THIS SET TO FALSE BY DEFAULT??? T^T
         frame.setVisible(true);
+/*      
         frame.addWindowFocusListener(new WindowFocusListener() {
-
             @Override
             public void windowGainedFocus(WindowEvent e) {
             }
@@ -34,7 +34,9 @@ public class Window {
             public void windowLostFocus(WindowEvent e) {
                 game_panel.getGame().windowFocusLost();
             }
+
             
         });
+*/
     }
 }

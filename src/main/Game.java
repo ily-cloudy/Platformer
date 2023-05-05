@@ -40,7 +40,7 @@ public class Game implements Runnable {
 
     private void initEntities() {
         env_manager = new EnvManager(this);
-        player = new Player(200, 200, 48, 64);
+        player = new Player(200, 200, 32, 32);
         player.loadCollisionData(EnvData.collision_matrix);
     }
 
@@ -111,11 +111,11 @@ public class Game implements Runnable {
 			}
 		}
 	}
-
+/* 
     public void windowFocusLost() {
         player.resetBooleans();
     }
-
+*/
     public Player getPlayer() {
         return player;
     }

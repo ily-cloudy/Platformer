@@ -6,7 +6,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
-import static utility.UtilMethods.CanMoveHere;
+
+
+import main.Game;
+
+import static utility.UtilMethods.*;
 
 import utility.LoadSave;
 
@@ -22,13 +26,23 @@ public class Player extends Entity{
 
     private String player_action = "run";
     private boolean moving = false;
-    private boolean left, up, right, down;
+    private boolean left, up, right, down, jump;
     private float player_speed = 2.0f;
     private int[][] collision_data;
+    private float x_draw_offset = 11 * Game.SCALE;
+	private float y_draw_offset = 11 * Game.SCALE;
+    
+    private float air_speed = 0f;
+    private float gravity = 0.05f * Game.SCALE;
+    private float jump_vel = -2.0f * Game.SCALE;
+    private float fall_vel_post_col= 0.5f;
+    private boolean airborne = false;
+
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
+        initHitbox(x, y, 12*Game.SCALE,16*Game.SCALE);
     }
 
     public void update() {
@@ -46,7 +60,7 @@ public class Player extends Entity{
             ani_index = 0;
         }
 
-        g.drawImage(ani_map.get(player_action)[ani_index], (int) x, (int) y, 128, 128, null);
+        g.drawImage(ani_map.get(player_action)[ani_index], (int) (hitbox.x + x_draw_offset), (int) (hitbox.y + y_draw_offset), (int)(width*Game.SCALE), (int) (height*Game.SCALE), null);
 //        drawHitbox(g);
 
     }
@@ -74,33 +88,82 @@ public class Player extends Entity{
         else {
             player_action = "idle";
         }
+
+//		if (airborne) {
+//			if (air_speed < 0)
+//				player_action = "jump";
+//			else
+//				player_action = "falling";
+//		}
+
     } 
 
     private void changePosition() {
         moving = false;
 
-        if (!left && !right && !up && !down) {return;}
-
-        float x_speed = 0; 
-        float y_speed = 0;
-
-        if (left && !right) {
-            x_speed = -player_speed;} 
-        else if (right && !left) {
-            x_speed = player_speed;}
-
-        if (up && !down) {
-            y_speed = -player_speed;}
-        else if (down && !up) {
-            y_speed = player_speed;}
-
-        if (CanMoveHere(x + x_speed, y + y_speed, width, height, collision_data)) {
-            this.x += x_speed;
-            this.y += y_speed;
-            moving = true;
+        if (jump) {
+            jump();
         }
 
+        if (!left && !right && !airborne) {return;}
+        
+        float x_speed = 0; 
+
+        if (left) {
+            x_speed -= player_speed;} 
+        if (right) {
+            x_speed += player_speed;}
+
+        if (! airborne) {
+            if (!IsEntityOnFloor(hitbox, collision_data))
+            airborne = true;
+        }
+
+        if (airborne) {
+            if (CanMoveHere(hitbox.x, hitbox.y + air_speed, hitbox.width, hitbox.height, collision_data)) {
+                hitbox.y += air_speed;
+                air_speed += gravity;
+                changeXPosition(x_speed);
+            }
+            else {
+                hitbox.y = GetEntityYPositionBySolid(hitbox, air_speed);
+                if (air_speed > 0) {
+                    resetAirborne();
+                }
+                else {
+                    air_speed = fall_vel_post_col;
+                }
+                changeXPosition(x_speed);
+            }
+        }
+        else {
+            changeXPosition(x_speed);
+        }
+        moving = true;
     }
+
+    private void jump() {
+        if (airborne) {return;}
+        airborne = true;
+        air_speed = jump_vel;
+
+    }
+
+    private void resetAirborne() {
+        airborne = false;
+        air_speed = 0;
+    }
+
+    private void changeXPosition(float x_speed) {
+        if (CanMoveHere(hitbox.x + x_speed, hitbox.y, width, height, collision_data)) {
+            hitbox.x += x_speed;
+        }
+        else {
+            hitbox.x = GetEntityXPositionBySolid(hitbox, x_speed);
+        }
+ 
+    }
+
 
     private void loadAnimations() {
 
@@ -170,6 +233,10 @@ public class Player extends Entity{
 
     public void setDown(boolean down) {
         this.down = down;
+    }
+
+    public void setJump (boolean jump) {
+        this.jump = jump;
     }
 
 }
