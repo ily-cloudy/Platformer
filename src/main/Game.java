@@ -17,7 +17,7 @@ public class Game implements Runnable {
     private EnvManager env_manager;
 
     public final static int TILES_DEFAULT_SIZE = 16;
-    public final static float SCALE = 4.0f;
+    public final static float SCALE = 3.0f;
     public final static int TILES_WIDTH = 26;
     public final static int TILES_HEIGHT = 14;
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
@@ -40,7 +40,7 @@ public class Game implements Runnable {
 
     private void initEntities() {
         env_manager = new EnvManager(this);
-        player = new Player(200, 200, 32, 32);
+        player = new Player(200, 200, (int) (32*SCALE), (int) (32*SCALE));
         player.loadCollisionData(EnvData.collision_matrix);
     }
 

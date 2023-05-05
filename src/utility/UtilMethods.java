@@ -10,10 +10,10 @@ public class UtilMethods {
     public static boolean CanMoveHere(float x, float y, float width, float height, int[][] collision_data) {
 
         // forgive me for my sins
-        if (! IsSolid(x+11*4, y+11*4, collision_data)) {
-            if (! IsSolid(x+11*4 + width, y+11*4 + height, collision_data)) {
-                if (! IsSolid(x+11*4 + width, y+11*4, collision_data)) {
-                    if (! IsSolid(x+11*4, y+11*4 + height, collision_data)) {
+        if (! IsSolid(x, y, collision_data)) {
+            if (! IsSolid(x + width, y+ height, collision_data)) {
+                if (! IsSolid(x + width, y, collision_data)) {
+                    if (! IsSolid(x, y + height, collision_data)) {
                         return true;
                     }
                 }
@@ -40,7 +40,7 @@ public class UtilMethods {
 /* TO-DO: MAKE CHANGES:  0 = empty, 1 = solid, 2 = semi-solid, 3 = trap tile.  */
 
     }
-
+ 
     public static float GetEntityXPositionBySolid(Rectangle2D.Float hitbox, float x_speed) {
 
         int current_tile = (int)(hitbox.x / Game.TILES_SIZE);
@@ -55,7 +55,6 @@ public class UtilMethods {
         // left 
             return current_tile * Game.TILES_SIZE;
         }
-
     }
 
     public static float GetEntityYPositionBySolid(Rectangle2D.Float hitbox, float air_speed) {
@@ -66,7 +65,7 @@ public class UtilMethods {
             // falling to floor
             int tile_y_pos = current_tile * Game.TILES_SIZE;
             int offset_y = (int)(Game.TILES_SIZE - hitbox.height);
-            return tile_y_pos + offset_y - 1;
+            return tile_y_pos + offset_y+16*Game.SCALE - 1;
         }
         else {
             // rising

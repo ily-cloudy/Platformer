@@ -107,7 +107,7 @@ public class EnvManager {
             // automatic scaling constants
             dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
             dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
-            g.drawImage(env_sprite_map.get(sprite), k[0]*16*4, k[1]*16*4, dim_x*4*16, dim_y*4*16, null);
+            g.drawImage(env_sprite_map.get(sprite), k[0]*Game.TILES_SIZE, k[1]*Game.TILES_SIZE, (int) (dim_x*Game.SCALE*16),(int) (dim_y*Game.SCALE*16), null);
         }); 
     }
 

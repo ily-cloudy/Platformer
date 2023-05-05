@@ -24,17 +24,17 @@ public class Player extends Entity{
     private BufferedImage img;
     HashMap<String, BufferedImage[]> ani_map = new HashMap<>();
 
-    private String player_action = "run";
+    private String player_action = "idle";
     private boolean moving = false;
     private boolean left, up, right, down, jump;
     private float player_speed = 2.0f;
     private int[][] collision_data;
-    private float x_draw_offset = 11 * Game.SCALE;
-	private float y_draw_offset = 11 * Game.SCALE;
+    private float x_draw_offset = -11 * Game.SCALE;
+	private float y_draw_offset = -11 * Game.SCALE;
     
     private float air_speed = 0f;
-    private float gravity = 0.05f * Game.SCALE;
-    private float jump_vel = -2.0f * Game.SCALE;
+    private float gravity = 0.04f * Game.SCALE; // =.04 -> vel_max = 2.0 ,, it's weird i dont know whats wrong
+    private float jump_vel = -2.00f * Game.SCALE;
     private float fall_vel_post_col= 0.5f;
     private boolean airborne = false;
 
@@ -57,10 +57,10 @@ public class Player extends Entity{
     public void render(Graphics g) {
 
         if (ani_index >= ani_map.get(player_action).length) {
-            ani_index = 0;
+            resetAniTick();
         }
 
-        g.drawImage(ani_map.get(player_action)[ani_index], (int) (hitbox.x + x_draw_offset), (int) (hitbox.y + y_draw_offset), (int)(width*Game.SCALE), (int) (height*Game.SCALE), null);
+        g.drawImage(ani_map.get(player_action)[ani_index], (int) (hitbox.x + x_draw_offset), (int) (hitbox.y + y_draw_offset), (int)(width), (int) (height), null);
 //        drawHitbox(g);
 
     }
@@ -68,6 +68,8 @@ public class Player extends Entity{
 
     // continously iterates through animation arrays at a fixed speed
     private void updateAnimationTick() {
+
+
 
         ani_tick ++;
         if (ani_tick >= ani_speed) {
@@ -82,6 +84,8 @@ public class Player extends Entity{
     
     private void setAnimation() {
 
+//        String start_ani = player_action;
+
         if(moving) {
             player_action = "run";
         }
@@ -89,12 +93,14 @@ public class Player extends Entity{
             player_action = "idle";
         }
 
-//		if (airborne) {
-//			if (air_speed < 0)
-//				player_action = "jump";
-//			else
-//				player_action = "falling";
-//		}
+		if (airborne) {
+			if (air_speed < 0)
+				player_action = "jump";
+			else
+				player_action = "fall";
+		}
+
+//        if (start_ani != player_action) {resetAniTick();}
 
     } 
 
@@ -115,14 +121,15 @@ public class Player extends Entity{
             x_speed += player_speed;}
 
         if (! airborne) {
-            if (!IsEntityOnFloor(hitbox, collision_data))
-            airborne = true;
+            if (!IsEntityOnFloor(hitbox, collision_data)) {
+                airborne = true;
+            }
         }
 
         if (airborne) {
             if (CanMoveHere(hitbox.x, hitbox.y + air_speed, hitbox.width, hitbox.height, collision_data)) {
-                hitbox.y += air_speed;
-                air_speed += gravity;
+                hitbox.y += (float) air_speed;
+                air_speed += (float) gravity;
                 changeXPosition(x_speed);
             }
             else {
@@ -155,7 +162,7 @@ public class Player extends Entity{
     }
 
     private void changeXPosition(float x_speed) {
-        if (CanMoveHere(hitbox.x + x_speed, hitbox.y, width, height, collision_data)) {
+        if (CanMoveHere(hitbox.x + x_speed, hitbox.y, hitbox.width, hitbox.height, collision_data)) {
             hitbox.x += x_speed;
         }
         else {
@@ -187,21 +194,48 @@ public class Player extends Entity{
         }
         
         ani_map.put("run", ani_run);
+
+        // jumping animation; 3 frames
+        BufferedImage[] ani_jump = new BufferedImage[3]; 
+
+        for (int i = 0; i < ani_jump.length; i++) {
+            ani_jump[i] = img.getSubimage(i*32, 64, 32, 32);
+        }
+
+        ani_map.put("jump", ani_jump);
+
+        // falling animation; 3 frames
+        BufferedImage[] ani_fall = new BufferedImage[3]; 
+
+        for (int i = 0; i < ani_fall.length; i++) {
+            ani_fall[i] = img.getSubimage(i*32 + 3*32, 64, 32, 32);
+        }
+
+        ani_map.put("fall", ani_fall);
+
     }
+
+    private void resetAniTick() {
+		ani_tick = 0;
+		ani_index = 0;
+	}
 
     public void loadCollisionData (int[][] collision_data) {
         this.collision_data = collision_data;
+        if (! IsEntityOnFloor(hitbox, collision_data)) {
+            airborne = true;
+        }
     }
 
 
     // is called when widow focus is lost; stops player from continuing to move
-    public void resetBooleans() {
-        left = false;
-        right = false;
-        down = false;
-        up = false;
-
-    }
+//    public void resetBooleans() {
+//        left = false;
+//        right = false;
+//        down = false;
+//        up = false;
+//
+//    }
 
     public boolean isLeft() {
         return left;
