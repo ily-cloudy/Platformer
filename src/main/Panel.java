@@ -12,8 +12,6 @@ public class Panel extends JPanel {
 
     private Game game;
 
-    
-
     // creates object for mouse inputs, as it will be used twice
     private Mouse mouse_inputs;
 

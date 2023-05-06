@@ -70,7 +70,7 @@ public class Player extends Entity{
     private void updateAnimationTick() {
 
 
-
+        String current_ani = player_action;
         ani_tick ++;
         if (ani_tick >= ani_speed) {
             ani_tick = 0;
@@ -80,6 +80,7 @@ public class Player extends Entity{
                 ani_index = 0;
             }
         }
+        if (current_ani != player_action) {ani_index = 0; ani_tick = 0;}
     }
     
     private void setAnimation() {
@@ -139,6 +140,7 @@ public class Player extends Entity{
                 }
                 else {
                     air_speed = fall_vel_post_col;
+                    x_speed += fall_vel_post_col;
                 }
                 changeXPosition(x_speed);
             }
@@ -204,11 +206,20 @@ public class Player extends Entity{
 
         ani_map.put("jump", ani_jump);
 
+        // jumping animation; 3 frames
+        BufferedImage[] ani_jump2 = new BufferedImage[3]; 
+
+        for (int i = 0; i < ani_jump2.length; i++) {
+            ani_jump2[i] = img.getSubimage(i*32, 64, 32, 32);
+        }
+
+        ani_map.put("jump2", ani_jump2);
+
         // falling animation; 3 frames
         BufferedImage[] ani_fall = new BufferedImage[3]; 
 
         for (int i = 0; i < ani_fall.length; i++) {
-            ani_fall[i] = img.getSubimage(i*32 + 3*32, 64, 32, 32);
+            ani_fall[i] = img.getSubimage(i*32 + 4*32, 64, 32, 32);
         }
 
         ani_map.put("fall", ani_fall);

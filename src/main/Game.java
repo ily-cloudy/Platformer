@@ -33,6 +33,7 @@ public class Game implements Runnable {
         game_panel = new Panel(this); 
         game_window = new Window(game_panel);
         // panel is needy and requires attention (this object gets input focus; necessary for inputs to function)
+        game_panel.setFocusable(true);
         game_panel.requestFocus();
         // :pray:
         startGameLoop();
