@@ -13,7 +13,7 @@ import utility.LoadSave;
 
 public class Menu extends State implements StateMethods{
     private BufferedImage[] imgs;
-
+    private BufferedImage img;
 
     public Menu(Game game) {
         super(game);
@@ -32,15 +32,24 @@ public class Menu extends State implements StateMethods{
         imgs[1] = LoadSave.GetSpriteSheet(LoadSave.BACKGROUND_1);
         imgs[2] = LoadSave.GetSpriteSheet(LoadSave.BACKGROUND_2);
         
+        img = LoadSave.GetSpriteSheet(LoadSave.MENU);
+
         for (int i = 0; i < imgs.length; i++) {
             g.drawImage(imgs[i], 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         }
         
+        g.drawImage(img, (int) (15*16*Game.SCALE), (int) (2*16*Game.SCALE), (int) (112 * Game.SCALE), (int) (176 * Game.SCALE), null);
+
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Dialog", Font.PLAIN, 25)); 
-        g.drawString("menu <3", Game.GAME_WIDTH / 8, (int) (50 * Game.SCALE));
-        g.drawString("-", Game.GAME_WIDTH / 8, (int) (60 * Game.SCALE));
-        g.drawString("press enter to start!", Game.GAME_WIDTH / 8, (int) (70 * Game.SCALE));
+        g.setFont(new Font("Monospaced", Font.BOLD, (int) (8 * Game.SCALE))); 
+        g.drawString("1|  public void PlaceHolder() {", Game.GAME_WIDTH / 6, (int) (67 * Game.SCALE));
+        
+        g.setFont(new Font("Monospaced", Font.PLAIN, (int) (8 * Game.SCALE))); 
+        g.drawString("2|      press ENTER to start;", Game.GAME_WIDTH / 6, (int) (103 * Game.SCALE));
+        g.drawString("3|      art by LuckyLoops and Trixie;", Game.GAME_WIDTH / 6, (int) (119 * Game.SCALE));
+        g.drawString("4|      music by Lou;", Game.GAME_WIDTH / 6, (int) (135 * Game.SCALE));
+        g.drawString("5|      programmed by Lou;", Game.GAME_WIDTH / 6, (int) (151 * Game.SCALE));
+        g.drawString("6|      }", Game.GAME_WIDTH / 6, (int) (167 * Game.SCALE));
     }
 
     @Override

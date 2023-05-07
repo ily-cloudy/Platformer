@@ -8,6 +8,7 @@ import java.util.Map;
 import main.Game;
 import utility.LoadSave;
 import environments.*;
+import gamestates.Gamestate;
 
 public class EnvManager {
 
@@ -25,6 +26,7 @@ public class EnvManager {
 //      env_sprite = LoadSave.GetSpriteSheet(LoadSave.SPRITES_ENVIRONMENT);
         importSprites();
         EnvData.env1();
+        
     }
 
     private void importSprites() {
