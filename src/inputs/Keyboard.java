@@ -2,6 +2,8 @@ package inputs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import gamestates.Gamestate;
 import main.Panel;
 
 import static utility.Parameters.Directions.*;
@@ -25,44 +27,31 @@ public class Keyboard implements KeyListener{
     // checks if relevant key is pressed, then changes the position in the corresponding direction
     @Override
     public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                game_panel.getGame().getPlayer().setUp(true);
+        switch (Gamestate.state) {
+            case MENU:
+                game_panel.getGame().getMenu().keyPressed(e);
                 break;
-            case KeyEvent.VK_RIGHT:
-                game_panel.getGame().getPlayer().setRight(true);
+            case PLAY:
+                game_panel.getGame().getPlay().keyPressed(e);
                 break;
-            case KeyEvent.VK_DOWN:
-                game_panel.getGame().getPlayer().setDown(true);
+            default:
                 break;
-            case KeyEvent.VK_LEFT:
-                game_panel.getGame().getPlayer().setLeft(true);
-                break;
-            case KeyEvent.VK_SPACE:
-                game_panel.getGame().getPlayer().setJump(true);
-                break;
+            
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                game_panel.getGame().getPlayer().setUp(false);
+        switch (Gamestate.state) {
+            case MENU:
+                game_panel.getGame().getMenu().keyReleased(e);
                 break;
-            case KeyEvent.VK_RIGHT:
-                game_panel.getGame().getPlayer().setRight(false);
+            case PLAY:
+                game_panel.getGame().getPlay().keyReleased(e);
                 break;
-            case KeyEvent.VK_DOWN:
-                game_panel.getGame().getPlayer().setDown(false);
+            default:
                 break;
-            case KeyEvent.VK_LEFT:
-                game_panel.getGame().getPlayer().setLeft(false);
-                break;
-            case KeyEvent.VK_SPACE:
-                game_panel.getGame().getPlayer().setJump(false);
-                break;
+            
         }
     }
-    
 }

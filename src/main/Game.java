@@ -1,9 +1,12 @@
 package main;
 
 import java.awt.Graphics;
-import entities.Player;
+import java.lang.management.GarbageCollectorMXBean;
+
 import environments.EnvData;
-import environments.EnvManager;
+
+import gamestates.Gamestate;
+import gamestates.*;
 
 public class Game implements Runnable {
 
@@ -13,8 +16,8 @@ public class Game implements Runnable {
     private final int FPS_SET = 60;
     private final int UPS_SET = 120;
 
-    private Player player;
-    private EnvManager env_manager;
+    private Play play;
+    private Menu menu;
 
     public final static int TILES_DEFAULT_SIZE = 16;
     public final static float SCALE = 3.0f;
@@ -39,10 +42,13 @@ public class Game implements Runnable {
         startGameLoop();
     }
 
+
+    // TO-DO: rename to: initialize classes
     private void initEntities() {
-        env_manager = new EnvManager(this);
-        player = new Player(200, 200, (int) (32*SCALE), (int) (32*SCALE));
-        player.loadCollisionData(EnvData.collision_matrix);
+
+        menu = new Menu(this);
+        play = new Play(this);
+
     }
 
     // thread method oh no
@@ -52,13 +58,30 @@ public class Game implements Runnable {
     }
 
     public void update() {
-        player.update();
-        env_manager.update();
+        switch (Gamestate.state) {
+            case MENU:
+                menu.update();
+                break;
+            case PLAY:
+                play.update();
+                break;
+            default:
+                break;
+        }
     }
 
     public void render(Graphics g) {
-        env_manager.draw(g);
-        player.render(g);
+        switch (Gamestate.state) {
+            case MENU:
+                menu.draw(g);
+                break;
+            case PLAY:
+                play.draw(g);
+                break;
+            default:
+                break;
+        }
+
     }
 
     // game loop using runnable, i.e. setting a fixed fps. 
@@ -112,12 +135,14 @@ public class Game implements Runnable {
 			}
 		}
 	}
-/* 
-    public void windowFocusLost() {
-        player.resetBooleans();
+
+    public Menu getMenu() {
+        return menu;
     }
-*/
-    public Player getPlayer() {
-        return player;
+
+    public Play getPlay() {
+        return play;
     }
+
+
 }
