@@ -27,7 +27,7 @@ public class Player extends Entity{
     private String player_action = "idle";
     private boolean moving = false;
     private boolean left, up, right, down, jump;
-    private float player_speed = 2.0f;
+    private float player_speed = 0.70f * Game.SCALE;
     private int[][] collision_data;
     private float x_draw_offset = -11 * Game.SCALE;
 	private float y_draw_offset = -11 * Game.SCALE;
