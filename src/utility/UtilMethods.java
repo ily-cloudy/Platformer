@@ -23,7 +23,8 @@ public class UtilMethods {
     }
 
     private static boolean IsSolid(float x, float y, int[][] collision_data) {
-        if (x < 0 || x >= Game.GAME_WIDTH) {
+        int max_width = collision_data[0].length * Game.TILES_SIZE;
+        if (x < 0 || x >= max_width) {
             return true;
         }
         if (y < 0 || y >= Game.GAME_HEIGHT) {

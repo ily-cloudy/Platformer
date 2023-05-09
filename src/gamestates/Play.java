@@ -12,10 +12,23 @@ import main.Game;
 public class Play extends State implements StateMethods{
     private Player player;
     private EnvManager env_manager;
+
+    private int x_env_offset;
+    private int left_border = (int) (0.3 * Game.GAME_WIDTH);
+    private int right_border = (int) (0.7 * Game.GAME_WIDTH);
+    
+    private int env_tiles_width;
+    
+    private int max_tile_offset;
+    private int max_env_offset;
     
     public Play(Game game) {
         super(game);
         initEntities();
+        EnvData.env1();
+        this.env_tiles_width = EnvData.collision_matrix[0].length;
+        this.max_tile_offset = env_tiles_width - Game.TILES_WIDTH;
+        this.max_env_offset = max_tile_offset * Game.TILES_SIZE;
          
     }
 
@@ -29,12 +42,32 @@ public class Play extends State implements StateMethods{
     public void update() {
         env_manager.update();
         player.update();
+        checkCloseToBorder();
     }
 
     @Override
     public void draw(Graphics g) {
-        env_manager.draw(g);
-        player.render(g);
+        env_manager.draw(g, x_env_offset);
+        player.render(g, x_env_offset);
+    }
+
+    private void checkCloseToBorder() {
+        int player_x = (int) player.getHitbox().x;
+        int delta = player_x - x_env_offset;
+
+        if (delta > right_border) {
+            x_env_offset += delta - right_border;
+        }
+        else if (delta < left_border) {
+            x_env_offset += delta - left_border;
+        }
+        // ENFORCES PROPER MAX AND MIN OFFSET
+        if (x_env_offset > max_env_offset) {
+            x_env_offset = max_env_offset;
+        }
+        else if (x_env_offset < 0) {
+            x_env_offset = 0;
+        }
     }
 
     @Override 

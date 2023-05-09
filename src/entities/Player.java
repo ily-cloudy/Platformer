@@ -54,13 +54,13 @@ public class Player extends Entity{
 
     }
 
-    public void render(Graphics g) {
+    public void render(Graphics g, int env_offset) {
 
         if (ani_index >= ani_map.get(player_action).length) {
             resetAniTick();
         }
 
-        g.drawImage(ani_map.get(player_action)[ani_index], (int) (hitbox.x + x_draw_offset), (int) (hitbox.y + y_draw_offset), (int)(width), (int) (height), null);
+        g.drawImage(ani_map.get(player_action)[ani_index], (int) (hitbox.x + x_draw_offset) - env_offset, (int) (hitbox.y + y_draw_offset), (int)(width), (int) (height), null);
 //        drawHitbox(g);
 
     }

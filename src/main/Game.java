@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Graphics;
-import java.lang.management.GarbageCollectorMXBean;
 
 import environments.EnvData;
 
@@ -20,7 +19,7 @@ public class Game implements Runnable {
     private Menu menu;
 
     public final static int TILES_DEFAULT_SIZE = 16;
-    public final static float SCALE = 4.0f;
+    public final static float SCALE = 3.0f;
     public final static int TILES_WIDTH = 26;
     public final static int TILES_HEIGHT = 14;
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
