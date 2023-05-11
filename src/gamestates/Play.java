@@ -3,17 +3,19 @@ package gamestates;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 import entities.Player;
 import environments.EnvData;
 import environments.EnvManager;
 import main.Game;
+import utility.LoadSave;
 
 public class Play extends State implements StateMethods{
     private Player player;
     private EnvManager env_manager;
 
-    private int x_env_offset;
+    private int x_env_offset = 0;
     private int left_border = (int) (0.3 * Game.GAME_WIDTH);
     private int right_border = (int) (0.7 * Game.GAME_WIDTH);
     
@@ -21,6 +23,10 @@ public class Play extends State implements StateMethods{
     
     private int max_tile_offset;
     private int max_env_offset;
+
+    private BufferedImage background0;
+    private BufferedImage background1;
+    private BufferedImage background2;
     
     public Play(Game game) {
         super(game);
@@ -29,7 +35,13 @@ public class Play extends State implements StateMethods{
         this.env_tiles_width = EnvData.collision_matrix[0].length;
         this.max_tile_offset = env_tiles_width - Game.TILES_WIDTH;
         this.max_env_offset = max_tile_offset * Game.TILES_SIZE;
-         
+
+        // static bg
+        background0 = LoadSave.GetSpriteSheet(LoadSave.BACKGROUND_0);
+        // should move
+        background1 = LoadSave.GetSpriteSheet(LoadSave.BACKGROUND_1);
+        // mby move idk does that look good?
+        background2 = LoadSave.GetSpriteSheet(LoadSave.BACKGROUND_2); 
     }
 
     private void initEntities() {
@@ -47,8 +59,18 @@ public class Play extends State implements StateMethods{
 
     @Override
     public void draw(Graphics g) {
+
+        // yep im lazy like that
+        g.drawImage(background0, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        drawMovingBackground(g);
         env_manager.draw(g, x_env_offset);
         player.render(g, x_env_offset);
+    }
+
+    private void drawMovingBackground(Graphics g) {
+        g.drawImage(background1, 0 - (int) (x_env_offset * 0.3), 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+
+        g.drawImage(background2, 0 - (int) (x_env_offset * 0.7), 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
     }
 
     private void checkCloseToBorder() {
