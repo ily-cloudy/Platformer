@@ -15,4 +15,6 @@ game loop improvements
 
 also ty [Eyrim](https://github.com/Eyrim) for coding support c:
 
+i still do not know what i am doing
+
 thank you for reading me <3
