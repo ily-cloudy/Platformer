@@ -68,14 +68,15 @@ public class Play extends State implements StateMethods{
     }
 
     private void drawMovingBackground(Graphics g) {
-
+        // mod: 'if picture does not fit perfectly inside the panel: draw a new one with x = x_0 + panel width
         // x positon: -1 at end prevents gap between seperate cloud pictures  
         g.drawImage(background1, 0 - (int) (x_env_offset * 0.3), 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
-        if (x_env_offset > 0) {
-            g.drawImage(background1, 0 - (int) (x_env_offset * 0.3) + Game.GAME_WIDTH, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        if ((x_env_offset * 0.3) % Game.GAME_WIDTH != 0) {
+            g.drawImage(background1, 0 - (int) (x_env_offset * 0.3) + Game.GAME_WIDTH - 1, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         } 
-        g.drawImage(background2, 0 - (int) (x_env_offset * 0.7), 0, Game.GAME_WIDTH - 1, Game.GAME_HEIGHT, null);
-        if (x_env_offset > 0) {
+
+        g.drawImage(background2, 0 - (int) (x_env_offset * 0.7), 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        if ((x_env_offset * 0.7) % Game.GAME_WIDTH != 0) {
             g.drawImage(background2, 0 - (int) (x_env_offset * 0.7) + Game.GAME_WIDTH - 1, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         } 
     }
