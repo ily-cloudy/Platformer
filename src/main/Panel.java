@@ -2,24 +2,20 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import javax.swing.JPanel;
-
 import inputs.Keyboard;
 import inputs.Mouse; 
 
 public class Panel extends JPanel {
 
     private Game game;
-
-    // creates object for mouse inputs, as it will be used twice
+    // TO-DO: Remove this; mouse inputs are not relevant to this project
     private Mouse mouse_inputs;
 
     // constructor method
     public Panel(Game game) { 
-        // initializing mouse_inputs object
+        // initializing mouse_inputs object (useless)
         mouse_inputs = new Mouse();
-
         this.game = game;
         setPanelSize();
 
@@ -42,7 +38,6 @@ public class Panel extends JPanel {
 
     // necessary to be able to draw
     public void paintComponent(Graphics g) {
-        // call super class (parent class?), i.e. Jpanel in this case
         super.paintComponent(g);
         game.render(g);
     }

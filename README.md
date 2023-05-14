@@ -1,5 +1,7 @@
 ﻿# Chaos :D
 
+silly platformer game
+
 [game assets](https://trixelized.itch.io/starstring-fields):
 check out the artist their work is amazing!
 

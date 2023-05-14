@@ -83,5 +83,11 @@ public class Menu extends State implements StateMethods{
     public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+    }
      
 }

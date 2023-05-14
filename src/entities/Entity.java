@@ -5,14 +5,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
-// abtract means that only subclasses/extensions of this class can be used construct objects
 public abstract class Entity {
     
-    // protected: subclasses can also access, whereas private vars can only be accessed in this one
     protected float x, y;
-
     protected int width, height;
-
     protected Rectangle2D.Float hitbox;
 
     public Entity(float x, float y, int width, int height) {
@@ -30,10 +26,6 @@ public abstract class Entity {
     protected void initHitbox(float x, float y, float width, float height) {
         hitbox = new Rectangle2D.Float(x, y, width, height);
     }
-//    protected void updateHitbox() {
-//        hitbox.x = (int) x;
-//        hitbox.y = (int) y;
-//    }
     
     public Rectangle2D.Float getHitbox() {
         return hitbox;

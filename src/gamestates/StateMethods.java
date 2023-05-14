@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+// Interface implemented by all gamestates.
 public interface StateMethods {
     
     public void update();
@@ -16,5 +17,6 @@ public interface StateMethods {
 
     public void keyPressed(KeyEvent e);
     public void keyReleased(KeyEvent e);
+    public void keyTyped(KeyEvent e);
 
 }

@@ -9,35 +9,35 @@ import javax.imageio.ImageIO;
 
 
 import main.Game;
-
 import static utility.UtilMethods.*;
-
 import utility.LoadSave;
-
 import java.util.HashMap;
-
 import static utility.Parameters.Directions.*;
 
 public class Player extends Entity{
 
+    // Animation parameters
     private int ani_tick, ani_index, ani_speed = 12;
     private BufferedImage img;
     HashMap<String, BufferedImage[]> ani_map = new HashMap<>();
-
     private String player_action = "idle";
     private boolean moving = false;
-    private boolean left, up, right, down, jump;
+    private boolean left, up, right, down, jump, dash;
     private float player_speed = 0.70f * Game.SCALE;
     private int[][] collision_data;
     private float x_draw_offset = -11 * Game.SCALE;
 	private float y_draw_offset = -11 * Game.SCALE;
     
+    // Movement parameters
     private float air_speed = 0f;
     private float gravity = 0.04f * Game.SCALE; // =.04 -> vel_max = 2.0 ,, it's weird i dont know whats wrong
     private float jump_vel = -2.00f * Game.SCALE;
     private float fall_vel_post_col= 0.5f;
     private boolean airborne = false;
+    private boolean dash_used = false;
 
+    private int flip_x = 0;
+    private int flip_w = 1;
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
@@ -46,12 +46,9 @@ public class Player extends Entity{
     }
 
     public void update() {
-
         changePosition();
-//        updateHitbox();
         updateAnimationTick();
         setAnimation();
-
     }
 
     public void render(Graphics g, int env_offset) {
@@ -60,13 +57,16 @@ public class Player extends Entity{
             resetAniTick();
         }
 
-        g.drawImage(ani_map.get(player_action)[ani_index], (int) (hitbox.x + x_draw_offset) - env_offset, (int) (hitbox.y + y_draw_offset), (int)(width), (int) (height), null);
+        g.drawImage(ani_map.get(player_action)[ani_index],
+            (int) (hitbox.x + x_draw_offset) - env_offset + flip_x,
+            (int) (hitbox.y + y_draw_offset), 
+            (int) (width * flip_w), 
+            (int) (height), null);
 //        drawHitbox(g);
-
     }
 
 
-    // continously iterates through animation arrays at a fixed speed
+    // Continously iterates through animation arrays at a fixed speed
     private void updateAnimationTick() {
 
 
@@ -84,14 +84,15 @@ public class Player extends Entity{
     }
     
     private void setAnimation() {
-
-//        String start_ani = player_action;
-
         if(moving) {
             player_action = "run";
         }
         else {
             player_action = "idle";
+        }
+
+        if (dash) {
+            player_action = "ghost";
         }
 
 		if (airborne) {
@@ -101,25 +102,31 @@ public class Player extends Entity{
 				player_action = "fall";
 		}
 
-//        if (start_ani != player_action) {resetAniTick();}
-
     } 
 
     private void changePosition() {
         moving = false;
 
-        if (jump) {
-            jump();
-        }
+        if (jump) {jump();}
+
+        if (dash) {dash();}
 
         if (!left && !right && !airborne) {return;}
         
         float x_speed = 0; 
 
         if (left) {
-            x_speed -= player_speed;} 
+            x_speed -= player_speed;
+            // flips animation to the left
+            flip_x = width;
+            flip_w = -1;
+        } 
         if (right) {
-            x_speed += player_speed;}
+            x_speed += player_speed;
+            // flips animation to the right
+            flip_x = 0;
+            flip_w = 1;
+        }
 
         if (! airborne) {
             if (!IsEntityOnFloor(hitbox, collision_data)) {
@@ -155,7 +162,26 @@ public class Player extends Entity{
         if (airborne) {return;}
         airborne = true;
         air_speed = jump_vel;
+    }
 
+
+    // FIX THIS PLS
+    private void dash() {
+        checkDashReset();
+        if (dash_used) {return;}
+        float speed = 5;
+        speed = 5;
+        for (int i = 0; i < 5; i++) {
+            changeXPosition(speed);
+        }
+        dash_used = true;
+        return;
+    }
+
+    private void checkDashReset() {
+        if (!airborne) {
+            dash_used = false;
+        }
     }
 
     private void resetAirborne() {
@@ -175,8 +201,6 @@ public class Player extends Entity{
 
 
     private void loadAnimations() {
-
-        // loads player sprites
         img = LoadSave.GetSpriteSheet(LoadSave.SPRITES_PLAYER);
 
         // idle animation: 6 frames
@@ -188,8 +212,8 @@ public class Player extends Entity{
         
         ani_map.put("idle", ani_idle);
         
-        // running animation; 7 frames
-        BufferedImage[] ani_run = new BufferedImage[7];
+        // running animation; 8 frames
+        BufferedImage[] ani_run = new BufferedImage[8];
 
         for (int i = 0; i < ani_run.length; i++) {
             ani_run[i] = img.getSubimage(i*32, 32, 32, 32);
@@ -206,15 +230,6 @@ public class Player extends Entity{
 
         ani_map.put("jump", ani_jump);
 
-        // jumping animation; 3 frames
-        BufferedImage[] ani_jump2 = new BufferedImage[3]; 
-
-        for (int i = 0; i < ani_jump2.length; i++) {
-            ani_jump2[i] = img.getSubimage(i*32, 64, 32, 32);
-        }
-
-        ani_map.put("jump2", ani_jump2);
-
         // falling animation; 3 frames
         BufferedImage[] ani_fall = new BufferedImage[3]; 
 
@@ -224,6 +239,24 @@ public class Player extends Entity{
 
         ani_map.put("fall", ani_fall);
 
+
+        // death animation; 9 frames 
+        BufferedImage[] ani_death = new BufferedImage[9];
+
+        for (int i = 0; i < ani_death.length; i++) {
+            ani_death[i] = img.getSubimage(i*32, 3*32, 32, 32);
+        }
+        
+        ani_map.put("death", ani_death);
+
+        // ghost animation (use for dash??); 4 frames
+        BufferedImage[] ani_ghost = new BufferedImage[4];
+
+        for (int i = 0; i < ani_ghost.length; i++) {
+            ani_ghost[i] = img.getSubimage(i*32, 4*32, 32, 32);
+        }
+        
+        ani_map.put("ghost", ani_ghost);
     }
 
     private void resetAniTick() {
@@ -238,16 +271,7 @@ public class Player extends Entity{
         }
     }
 
-
-    // is called when widow focus is lost; stops player from continuing to move
-//    public void resetBooleans() {
-//        left = false;
-//        right = false;
-//        down = false;
-//        up = false;
-//
-//    }
-
+    // annoying methods; ignore  
     public boolean isLeft() {
         return left;
     }
@@ -284,4 +308,7 @@ public class Player extends Entity{
         this.jump = jump;
     }
 
+    public void setDash (boolean dash) {
+        this.dash = dash;
+    }
 }

@@ -17,13 +17,11 @@ public class EnvManager {
 
     private EnvData envdata;
     private Game game;
-//  private BufferedImage env_sprite;
     HashMap<String, BufferedImage> env_sprite_map = new HashMap<>();
 
 
     public EnvManager(Game game) {
         this.game = game;
-//      env_sprite = LoadSave.GetSpriteSheet(LoadSave.SPRITES_ENVIRONMENT);
         importSprites();
         EnvData.env1();
         
@@ -96,23 +94,20 @@ public class EnvManager {
         env_sprite_map.put("leftvine3 1x1", img.getSubimage(7*16, 3*16, 1*16, 1*16));
         env_sprite_map.put("rightvine1 1x1", img.getSubimage(10*16, 1*16, 1*16, 1*16));
         env_sprite_map.put("rightvine2 1x1", img.getSubimage(10*16, 2*16, 1*16, 1*16));
-        env_sprite_map.put("rightvine3 1x1", img.getSubimage(10*16, 3*16, 1*16, 1*16));
-
-        // automatic scaling constants
-        dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
-        dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1))); 
+        env_sprite_map.put("rightvine3 1x1", img.getSubimage(10*16, 3*16, 1*16, 1*16)); 
     }
-    
+
+    // Renders the environment hashmap 
     public void draw(Graphics g, int lvl_offset) {
         EnvData.layout.forEach((k,v) -> {
             sprite = v;
-            // automatic scaling constants
+            // Automatic scaling constants ensure that blocks are rendered with the correct dimensions.
             dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
             dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
             g.drawImage(env_sprite_map.get(sprite), k[0]*Game.TILES_SIZE - lvl_offset, k[1]*Game.TILES_SIZE, (int) (dim_x*Game.SCALE*16),(int) (dim_y*Game.SCALE*16), null);
         }); 
     }
-
+    // TO-DO: make this pls
     public void update() {
     }
 }

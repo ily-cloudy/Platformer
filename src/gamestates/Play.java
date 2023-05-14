@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.TimeUnit;
 
 import entities.Player;
 import environments.EnvData;
@@ -123,15 +124,20 @@ public class Play extends State implements StateMethods{
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 player.setRight(true);
                 break;
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 player.setLeft(true);
                 break;
             case KeyEvent.VK_SPACE:
                 player.setJump(true);
                 break;
+                
+            case KeyEvent.VK_SHIFT:
+                player.setDash(true);
+                break;
+
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
                 break;
@@ -141,20 +147,30 @@ public class Play extends State implements StateMethods{
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 player.setRight(false);
                 break;
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 player.setLeft(false);
                 break;
             case KeyEvent.VK_SPACE:
                 player.setJump(false);
                 break;
+            case KeyEvent.VK_SHIFT:
+                player.setDash(false);
+                break;
         }
     }
 
+    
+
     public Player getPlayer() {
         return player;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
     }
 
 }

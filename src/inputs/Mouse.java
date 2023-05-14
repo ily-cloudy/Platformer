@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 
 // TO-DO: do something with mouse inputs, or delete them if they are unnecessary 
 
+// TO-DO: 12.05.2023: they are probably useless for this project.
 public class Mouse implements MouseListener, MouseMotionListener {
 
     @Override
