@@ -1,19 +1,18 @@
 package utility;
 
-// 12.05.2023: What is the point of this?
-// - why is it here?
-// - what does it do?
+import main.Game;
 
-// 12.05.2023: it does something, i do not know what, but the code does not run without it, so dont remove
+// collection of parameters that can be modified to change the feel of the game
 
 public class Parameters {
-    
-    public static class Directions {
 
-        public static final int left = 0;
-        public static final int up = 1;
-        public static final int right = 2;
-        public static final int down = 3;
-    }
+    // changes window size and game scale
+    public static final float TILE_SIZE_MULTIPLIER = 3.0f; 
+
+    public static final float GRAVITY = 0.04f * Game.SCALE;
+
+    public static final float RUNNING_SPEED = 0.70f * Game.SCALE;
+    
+    public static final int ANI_SPEED = 12;
 
 }

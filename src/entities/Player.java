@@ -12,37 +12,33 @@ import main.Game;
 import static utility.UtilMethods.*;
 import utility.LoadSave;
 import java.util.HashMap;
-import static utility.Parameters.Directions.*;
+import static utility.Parameters.*;
 
 public class Player extends Entity{
 
-    // Animation parameters
-    private int ani_tick, ani_index, ani_speed = 12;
+    // player specific animation parameters
     private BufferedImage img;
     HashMap<String, BufferedImage[]> ani_map = new HashMap<>();
     private String player_action = "idle";
     private boolean moving = false;
-    private boolean left, up, right, down, jump, dash;
-    private float player_speed = 0.70f * Game.SCALE;
+    private boolean left, right, jump, dash;
     private int[][] collision_data;
     private float x_draw_offset = -11 * Game.SCALE;
 	private float y_draw_offset = -11 * Game.SCALE;
     
-    // Movement parameters
-    private float air_speed = 0f;
-    private float gravity = 0.04f * Game.SCALE; // =.04 -> vel_max = 2.0 ,, it's weird i dont know whats wrong
+    // player specific movement parameters
     private float jump_vel = -2.00f * Game.SCALE;
     private float fall_vel_post_col= 0.5f;
-    private boolean airborne = false;
     private boolean dash_used = false;
 
+    // for flipping player character into the direction of travel
     private int flip_x = 0;
     private int flip_w = 1;
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
-        initHitbox(x, y, 12*Game.SCALE,16*Game.SCALE);
+        initHitbox(12*Game.SCALE,16*Game.SCALE);
     }
 
     public void update() {
@@ -70,10 +66,9 @@ public class Player extends Entity{
     // Continously iterates through animation arrays at a fixed speed
     private void updateAnimationTick() {
 
-
         String current_ani = player_action;
         ani_tick ++;
-        if (ani_tick >= ani_speed) {
+        if (ani_tick >= ANI_SPEED) {
             ani_tick = 0;
             ani_index ++;
             // note the rows of the array are still picked manually; therefore, its length is too.
@@ -117,13 +112,13 @@ public class Player extends Entity{
         float x_speed = 0; 
 
         if (left) {
-            x_speed -= player_speed;
+            x_speed -= RUNNING_SPEED;
             // flips animation to the left
             flip_x = width;
             flip_w = -1;
         } 
         if (right) {
-            x_speed += player_speed;
+            x_speed += RUNNING_SPEED;
             // flips animation to the right
             flip_x = 0;
             flip_w = 1;
@@ -138,7 +133,7 @@ public class Player extends Entity{
         if (airborne) {
             if (CanMoveHere(hitbox.x, hitbox.y + air_speed, hitbox.width, hitbox.height, collision_data)) {
                 hitbox.y += (float) air_speed;
-                air_speed += (float) gravity;
+                air_speed += (float) GRAVITY;
                 changeXPosition(x_speed);
             }
             else {
@@ -286,28 +281,12 @@ public class Player extends Entity{
         this.left = left;
     }
 
-    public boolean isUp() {
-        return up;
-    }
-
-    public void setUp(boolean up) {
-        this.up = up;
-    }
-
     public boolean isRight() {
         return right;
     }
 
     public void setRight(boolean right) {
         this.right = right;
-    }
-
-    public boolean isDown() {
-        return down;
-    }
-
-    public void setDown(boolean down) {
-        this.down = down;
     }
 
     public void setJump (boolean jump) {

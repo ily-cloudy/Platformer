@@ -3,6 +3,7 @@ package main;
 import java.awt.Graphics;
 import gamestates.Gamestate;
 import gamestates.*;
+import utility.Parameters;
 
 public class Game implements Runnable {
 
@@ -18,7 +19,7 @@ public class Game implements Runnable {
     private Menu menu;
 
     // Scale variable; modify to change window size. 
-    public final static float SCALE = 3.0f;
+    public final static float SCALE = Parameters.TILE_SIZE_MULTIPLIER;
 
     // Window/Panel parameters: DO NOT TOUCH
     public final static int TILES_DEFAULT_SIZE = 16;

@@ -1,6 +1,5 @@
 package utility;
 
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import main.Game;
@@ -9,17 +8,13 @@ public class UtilMethods {
     
     public static boolean CanMoveHere(float x, float y, float width, float height, int[][] collision_data) {
 
-        // forgive me for my sins
-        if (! IsSolid(x, y, collision_data)) {
-            if (! IsSolid(x + width, y+ height, collision_data)) {
-                if (! IsSolid(x + width, y, collision_data)) {
-                    if (! IsSolid(x, y + height, collision_data)) {
-                        return true;
-                    }
-                }
-            }  
-        }
-        return false;
+        if (IsSolid(x, y, collision_data)) {return false;}
+        if (IsSolid(x + width, y+ height, collision_data)) {return false;}
+        if (IsSolid(x + width, y, collision_data)) {return false;}
+        if (IsSolid(x, y + height, collision_data)) {return false;}
+        
+        return true;
+        
     }
 
     private static boolean IsSolid(float x, float y, int[][] collision_data) {

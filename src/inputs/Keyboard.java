@@ -6,8 +6,6 @@ import java.awt.event.KeyListener;
 import gamestates.Gamestate;
 import main.Panel;
 
-import static utility.Parameters.Directions.*;
-
 public class Keyboard implements KeyListener{
 
     private Panel game_panel;
