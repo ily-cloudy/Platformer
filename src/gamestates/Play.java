@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
 import entities.Player;
-import environments.EnvData;
+import environments.Env1Data;
+import environments.Env2Data;
 import environments.EnvManager;
+import environments.Environment;
 import main.Game;
 import utility.LoadSave;
 
@@ -32,8 +34,8 @@ public class Play extends State implements StateMethods{
     public Play(Game game) {
         super(game);
         initEntities();
-        EnvData.env1();
-        this.env_tiles_width = EnvData.collision_matrix[0].length;
+        Env1Data.loadEnv();
+        this.env_tiles_width = Env1Data.collision_matrix[0].length;
         this.max_tile_offset = env_tiles_width - Game.TILES_WIDTH;
         this.max_env_offset = max_tile_offset * Game.TILES_SIZE;
 
@@ -48,7 +50,16 @@ public class Play extends State implements StateMethods{
     private void initEntities() {
         env_manager = new EnvManager(game);
         player = new Player(50, 200, (int) (32*Game.SCALE), (int) (32*Game.SCALE));
-        player.loadCollisionData(EnvData.collision_matrix);
+        switch (Environment.env) {
+            case ENV1:
+                player.loadCollisionData(Env1Data.collision_matrix);
+                break;
+            case ENV2:
+                player.loadCollisionData(Env2Data.collision_matrix);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

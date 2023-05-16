@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Graphics;
-import environments.EnvData;
 import gamestates.Gamestate;
 import gamestates.*;
 

@@ -49,6 +49,7 @@ public class Player extends Entity{
         changePosition();
         updateAnimationTick();
         setAnimation();
+        checkDashReset();
     }
 
     public void render(Graphics g, int env_offset) {
@@ -167,20 +168,25 @@ public class Player extends Entity{
 
     // FIX THIS PLS
     private void dash() {
+        float speed;
         checkDashReset();
-        if (dash_used) {return;}
-        float speed = 5;
-        speed = 5;
-        for (int i = 0; i < 5; i++) {
+        if (this.dash_used) {return;}
+        // checks travel direction and assigns the corresponding speed
+        if (flip_w == 1) {speed = 1;}
+        else {speed = -1;}
+        
+        for (int i = 0; i < 100; i++) {
             changeXPosition(speed);
         }
-        dash_used = true;
+        this.dash_used = true;
         return;
     }
-
+    // TO-DO: find suitable method to chack if !airborne for at least .2 seconds
     private void checkDashReset() {
         if (!airborne) {
-            dash_used = false;
+            // wait 0.2 seconds 
+            if (!airborne) {
+                this.dash_used = false;}
         }
     }
 

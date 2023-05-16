@@ -15,7 +15,7 @@ public class EnvManager {
     private int dim_x, dim_y;
     private String sprite = "spikes up2 1x1";
 
-    private EnvData envdata;
+    private Env1Data envdata;
     private Game game;
     HashMap<String, BufferedImage> env_sprite_map = new HashMap<>();
 
@@ -23,8 +23,16 @@ public class EnvManager {
     public EnvManager(Game game) {
         this.game = game;
         importSprites();
-        EnvData.env1();
-        
+        switch (Environment.env) {
+            case ENV1:
+                Env1Data.loadEnv();
+                break;
+            case ENV2:
+                Env2Data.loadEnv();
+                break;
+            default:
+                break;
+        }
     }
 
     private void importSprites() {
@@ -99,15 +107,31 @@ public class EnvManager {
 
     // Renders the environment hashmap 
     public void draw(Graphics g, int lvl_offset) {
-        EnvData.layout.forEach((k,v) -> {
-            sprite = v;
-            // Automatic scaling constants ensure that blocks are rendered with the correct dimensions.
-            dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
-            dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
-            g.drawImage(env_sprite_map.get(sprite), k[0]*Game.TILES_SIZE - lvl_offset, k[1]*Game.TILES_SIZE, (int) (dim_x*Game.SCALE*16),(int) (dim_y*Game.SCALE*16), null);
-        }); 
+        switch (Environment.env) {
+            case ENV1:
+                Env1Data.layout.forEach((k,v) -> {
+                    sprite = v;
+                    // Automatic scaling constants ensure that blocks are rendered with the correct dimensions.
+                    dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
+                    dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
+                    g.drawImage(env_sprite_map.get(sprite), k[0]*Game.TILES_SIZE - lvl_offset, k[1]*Game.TILES_SIZE, (int) (dim_x*Game.SCALE*16),(int) (dim_y*Game.SCALE*16), null);
+                }); 
+                break;
+            case ENV2:
+                Env2Data.layout.forEach((k,v) -> {
+                    sprite = v;
+                    // Automatic scaling constants ensure that blocks are rendered with the correct dimensions.
+                    dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
+                    dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
+                    g.drawImage(env_sprite_map.get(sprite), k[0]*Game.TILES_SIZE - lvl_offset, k[1]*Game.TILES_SIZE, (int) (dim_x*Game.SCALE*16),(int) (dim_y*Game.SCALE*16), null);
+                }); 
+                break;
+            default:
+                break;
+        }
+
     }
-    // TO-DO: make this pls
+    // TO-DO: make this pls. Update: what and why is this?
     public void update() {
     }
 }
