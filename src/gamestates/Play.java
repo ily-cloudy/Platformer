@@ -89,8 +89,10 @@ public class Play extends State implements StateMethods{
 
         g.drawImage(background2, 0 - (int) (x_env_offset * 0.7), 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         if ((x_env_offset * 0.7) % Game.GAME_WIDTH != 0) {
-            g.drawImage(background2, 0 - (int) (x_env_offset * 0.7) + Game.GAME_WIDTH - 1, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
-        } 
+            g.drawImage(background2, 0 - (int) (x_env_offset * 0.7) + Game.GAME_WIDTH * 1 - 1, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+            // second cloud image; more can be added this way. this should be formalized later.
+            g.drawImage(background2, 0 - (int) (x_env_offset * 0.7) + Game.GAME_WIDTH * 2 - 1, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        }   
     }
 
     private void checkCloseToBorder() {

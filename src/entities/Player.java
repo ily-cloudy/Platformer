@@ -3,7 +3,6 @@ package entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 
@@ -50,16 +49,13 @@ public class Player extends Entity{
 
     public void render(Graphics g, int env_offset) {
 
-        if (ani_index >= ani_map.get(player_action).length) {
-            resetAniTick();
-        }
+        if (ani_index >= ani_map.get(player_action).length) { resetAniTick(); }
 
         g.drawImage(ani_map.get(player_action)[ani_index],
             (int) (hitbox.x + x_draw_offset) - env_offset + flip_x,
             (int) (hitbox.y + y_draw_offset), 
             (int) (width * flip_w), 
             (int) (height), null);
-//        drawHitbox(g);
     }
 
 
@@ -72,15 +68,19 @@ public class Player extends Entity{
             ani_tick = 0;
             ani_index ++;
             // note the rows of the array are still picked manually; therefore, its length is too.
-            if (ani_index >= ani_map.get(player_action).length) {
-                ani_index = 0;
+            if (ani_index >= ani_map.get(player_action).length) { 
+                ani_index = 0; 
             }
         }
-        if (current_ani != player_action) {ani_index = 0; ani_tick = 0;}
+
+        if (current_ani != player_action) { 
+            ani_index = 0; 
+            ani_tick = 0; 
+        }
     }
     
     private void setAnimation() {
-        if(moving) {
+        if (moving) {
             player_action = "run";
         }
         else {
@@ -103,11 +103,13 @@ public class Player extends Entity{
     private void changePosition() {
         moving = false;
 
-        if (jump) {jump();}
+        if (jump) { jump(); }
 
-        if (dash) {dash();}
+        if (dash) { dash(); }
 
-        if (!left && !right && !airborne) {return;}
+        if (!left && !right && !airborne) { 
+            return; 
+        }
         
         float x_speed = 0; 
 
@@ -124,9 +126,9 @@ public class Player extends Entity{
             flip_w = 1;
         }
 
-        if (! airborne) {
-            if (!IsEntityOnFloor(hitbox, collision_data)) {
-                airborne = true;
+        if (!airborne) {
+            if (!IsEntityOnFloor(hitbox, collision_data)) { 
+                airborne = true; 
             }
         }
 
@@ -138,8 +140,8 @@ public class Player extends Entity{
             }
             else {
                 hitbox.y = GetEntityYPositionBySolid(hitbox, air_speed);
-                if (air_speed > 0) {
-                    resetAirborne();
+                if (air_speed > 0) { 
+                    resetAirborne(); 
                 }
                 else {
                     air_speed = fall_vel_post_col;
@@ -148,14 +150,17 @@ public class Player extends Entity{
                 changeXPosition(x_speed);
             }
         }
-        else {
-            changeXPosition(x_speed);
+        else { 
+            changeXPosition(x_speed); 
         }
+
         moving = true;
     }
 
     private void jump() {
-        if (airborne) {return;}
+        if (airborne) {
+            return;
+        }
         airborne = true;
         air_speed = jump_vel;
     }
@@ -181,7 +186,8 @@ public class Player extends Entity{
         if (!airborne) {
             // wait 0.2 seconds 
             if (!airborne) {
-                this.dash_used = false;}
+                this.dash_used = false;
+            }
         }
     }
 

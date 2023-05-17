@@ -105,31 +105,39 @@ public class EnvManager {
         env_sprite_map.put("rightvine3 1x1", img.getSubimage(10*16, 3*16, 1*16, 1*16)); 
     }
 
-    // Renders the environment hashmap 
+    // Renders the environment hashmap
+    // yes, it is unreadable; that is the point. only i may know the secrets! >:3
+    // TO-DO: Make this readable again.
     public void draw(Graphics g, int lvl_offset) {
         switch (Environment.env) {
             case ENV1:
                 Env1Data.layout.forEach((k,v) -> {
-                    sprite = v;
-                    // Automatic scaling constants ensure that blocks are rendered with the correct dimensions.
-                    dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
-                    dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
-                    g.drawImage(env_sprite_map.get(sprite), k[0]*Game.TILES_SIZE - lvl_offset, k[1]*Game.TILES_SIZE, (int) (dim_x*Game.SCALE*16),(int) (dim_y*Game.SCALE*16), null);
-                }); 
+                    // calls render method
+                    g.drawImage(
+                        // retrieves sprite based on string input v
+                        env_sprite_map.get(v),
+                        // determines x position based on the x component of the provided coordinate 
+                        k[0]*Game.TILES_SIZE - lvl_offset,
+                        // determines y position based on the y component of the provided coordinate
+                        k[1]*Game.TILES_SIZE,
+                        // determines width
+                        (int)(Integer.parseInt(String.valueOf(v.charAt(v.length()-3)))*Game.SCALE*16),
+                        // determines height
+                        (int)(Integer.parseInt(String.valueOf(v.charAt(v.length()-1)))*Game.SCALE*16),
+                        null);});
                 break;
             case ENV2:
                 Env2Data.layout.forEach((k,v) -> {
-                    sprite = v;
-                    // Automatic scaling constants ensure that blocks are rendered with the correct dimensions.
-                    dim_x = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-3))); 
-                    dim_y = Integer.parseInt(String.valueOf(sprite.charAt(sprite.length()-1)));          
-                    g.drawImage(env_sprite_map.get(sprite), k[0]*Game.TILES_SIZE - lvl_offset, k[1]*Game.TILES_SIZE, (int) (dim_x*Game.SCALE*16),(int) (dim_y*Game.SCALE*16), null);
-                }); 
+                    g.drawImage(env_sprite_map.get(v),
+                    k[0]*Game.TILES_SIZE - lvl_offset,
+                    k[1]*Game.TILES_SIZE,
+                    (int)(Integer.parseInt(String.valueOf(v.charAt(v.length()-3)))*Game.SCALE*16),
+                    (int)(Integer.parseInt(String.valueOf(v.charAt(v.length()-1)))*Game.SCALE*16),
+                    null);}); 
                 break;
             default:
                 break;
         }
-
     }
     // TO-DO: make this pls. Update: what and why is this?
     public void update() {

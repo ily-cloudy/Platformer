@@ -97,10 +97,11 @@ public class Game implements Runnable {
 		long last_check = System.currentTimeMillis();
         double d_updates = 0;
         double d_frames = 0;
+        long current_time;
 
         // continously checks if the fixed frame duration has passed.
 		while (true) {
-            long current_time = System.nanoTime();
+            current_time = System.nanoTime();
 
             // d_updates will be >= 1, when the duration since last update is over the 'fixed' update duration
             d_updates += (current_time - previous_time) / update_duration;

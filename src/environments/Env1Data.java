@@ -143,9 +143,9 @@ public class Env1Data {
         layout.put(new int[]{33,8},"c2 top right 1x1");
         layout.put(new int[]{34,8},"rightvine1 1x1");
 
-        layout.put(new int[]{41,8},"lights 1x2");
-        layout.put(new int[]{42,8},"hang grass 1x1");
-        layout.put(new int[]{43,8},"lights 1x3");
+        layout.put(new int[]{41,8},"lights 1x1");
+        layout.put(new int[]{42,8},"lights 1x3");
+        layout.put(new int[]{43,8},"lights 1x2");
 
         // row 7
         layout.put(new int[]{6,7},"topgrass1 1x1");
@@ -183,7 +183,7 @@ public class Env1Data {
         layout.put(new int[]{41,6},"c2 top left 1x1");
         layout.put(new int[]{42,6},"grass2 1x1");
         layout.put(new int[]{43,6},"c1 top right 1x1");
-        layout.put(new int[]{44,7},"rightvine2 1x1");
+        layout.put(new int[]{44,6},"rightvine2 1x1");
 
         // row 5
         layout.put(new int[]{11,5},"rock 2x2");
@@ -195,7 +195,7 @@ public class Env1Data {
         layout.put(new int[]{28,5},"rightvine2 1x1");
 
         layout.put(new int[]{34,5},"hang grass 1x1");
-        layout.put(new int[]{35,5},"lights 1x2");
+        layout.put(new int[]{35,5},"lights 1x1");
         layout.put(new int[]{36,5},"hang grass 1x1");
 
         layout.put(new int[]{41,5},"topgrass1 1x1");
@@ -204,8 +204,10 @@ public class Env1Data {
 
         // row 4
         
+        layout.put(new int[]{41,4}, "bush 3x2");
+
         layout.put(new int[]{25,4},"topgrass1 1x1");
-        layout.put(new int[]{26,4},"bush1 1x1");
+        layout.put(new int[]{26,4},"stub 1x1");
         layout.put(new int[]{27,4},"topgrass2 1x1");
         
 
@@ -247,27 +249,161 @@ public class Env1Data {
         // row 1
         layout.put(new int[]{29,1},"topgrass1 1x1");
         layout.put(new int[]{30,1},"bush3 1x1");
+        layout.put(new int[]{35,1},"rock 2x2");
 
-        
-        
+        // trying a new format: 3x2 block (47,5)
+        layout.put(new int[]{47,4},"bush2 1x1");
+        layout.put(new int[]{48,4},"stub 1x1");
+        layout.put(new int[]{49,4},"tiny bush 1x1");
 
+        layout.put(new int[]{46,5},"leftvine1 1x1");
+        layout.put(new int[]{47,5},"c2 top left 1x1");
+        layout.put(new int[]{48,5},"grass1 1x1");
+        layout.put(new int[]{49,5},"c1 top right 1x1");
+        layout.put(new int[]{50,5},"rightvine2 1x1");
+
+        layout.put(new int[]{46,6},"leftvine2 1x1");
+        layout.put(new int[]{47,6},"c1 bot left 1x1");
+        layout.put(new int[]{48,6},"dark 1x1");
+        layout.put(new int[]{49,6},"c2 bot right 1x1");
+        layout.put(new int[]{50,6},"rightvine1 1x1");
+
+        layout.put(new int[]{47,7},"hang grass 1x1");
+        layout.put(new int[]{48,7},"lights 1x2");
+        layout.put(new int[]{49,7},"hang grass 1x1");
+
+        // tree 54,0
+        layout.put(new int[]{54,0},"tree 4x4");
+
+        // cliff 54,4
+        layout.put(new int[]{53,4},"leftvine1 1x1");
+        layout.put(new int[]{53,5},"leftvine2 1x1");
+        layout.put(new int[]{53,6},"leftvine3 1x1");
+        layout.put(new int[]{54,7},"lights 1x1");
+        layout.put(new int[]{54,7},"leftvine2 1x1");
+        layout.put(new int[]{54,8},"leftvine1 1x1");
+        layout.put(new int[]{54,9},"leftvine2 1x1");
+        layout.put(new int[]{54,10},"leftvine3 1x1");
+        layout.put(new int[]{55,11},"hang grass 1x1");
+        layout.put(new int[]{55,11},"leftvine3 1x1");
+        layout.put(new int[]{55,12},"leftvine2 1x1");
+        layout.put(new int[]{55,13},"leftvine1 1x1");
+
+        layout.put(new int[]{54,4},"c2 top left 1x1");
+        layout.put(new int[]{55,4},"grass 2x1");
+        layout.put(new int[]{57,4},"c1 top right 1x1");
+
+        layout.put(new int[]{54,5},"dark 1x1");
+        layout.put(new int[]{55,5},"dark+vine 1x1");
+        layout.put(new int[]{56,5},"dark 1x1");
+        layout.put(new int[]{57,5},"dark 1x1");
+
+        layout.put(new int[]{54,6},"c1 bot left 1x1");
+        layout.put(new int[]{55,6},"dark 1x1");
+        layout.put(new int[]{56,6},"orange rect 2x1");
+
+        layout.put(new int[]{55,7},"rect3 2x1");
+        layout.put(new int[]{57,7},"dark 1x1");
+        layout.put(new int[]{58,7},"dark 1x1");
+        layout.put(new int[]{59,7},"c2 top right 1x1");
+
+        layout.put(new int[]{55,8},"dark 1x1");
+        layout.put(new int[]{56,8},"dark 1x1");
+        layout.put(new int[]{57,8},"rect1 2x1");
+        layout.put(new int[]{59,8},"dark 1x1");
+
+        layout.put(new int[]{55,9},"orange rect 2x1");
+        layout.put(new int[]{57,9},"dark 1x1");
+        layout.put(new int[]{58,9},"dark 1x1");
+        layout.put(new int[]{59,9},"c1 bot right 1x1");
+
+        layout.put(new int[]{55,10},"c2 bot left 1x1");
+        layout.put(new int[]{56,10},"dark 1x1");
+        layout.put(new int[]{57,10},"dark+vine 1x1");
+        layout.put(new int[]{58,10},"dark 1x1");
+        
+        layout.put(new int[]{56,12},"rect 3x1");
+
+        layout.put(new int[]{56,11},"dark 1x1");
+        layout.put(new int[]{57,11},"dark 1x1");
+        layout.put(new int[]{58,11},"dark 1x1");
+
+        layout.put(new int[]{56,13},"c1 bot left 1x1");
+        layout.put(new int[]{57,13},"dark 1x1");
+        layout.put(new int[]{58,13},"dark 1x1");
+
+        layout.put(new int[]{58,4},"rightvine3 1x1");
+        layout.put(new int[]{58,5},"rightvine2 1x1");
+        layout.put(new int[]{58,6},"rightvine3 1x1");
+        layout.put(new int[]{58,6},"topgrass1 1x1");
+        layout.put(new int[]{59,6},"bush1 1x1");
+        layout.put(new int[]{60,7},"rightvine1 1x1");
+        layout.put(new int[]{60,8},"rightvine2 1x1");
+        layout.put(new int[]{60,9},"rightvine3 1x1");
+        layout.put(new int[]{59,10},"lights 1x1");
+        layout.put(new int[]{59,10},"rightvine3 1x1");
+        layout.put(new int[]{59,11},"rightvine1 1x1");
+        layout.put(new int[]{59,12},"rightvine2 1x1");
+        layout.put(new int[]{59,13},"rightvine1 1x1");
+
+        // spike floor 59,13
+
+        layout.put(new int[]{59,13},"spikes up1 1x1");
+        layout.put(new int[]{60,13},"spikes up1 1x1");
+        layout.put(new int[]{61,13},"spikes up2 1x1");
+        layout.put(new int[]{62,13},"spikes up1 1x1");
+        layout.put(new int[]{63,13},"spikes up2 1x1");
+        layout.put(new int[]{64,13},"spikes up1 1x1");
+        layout.put(new int[]{65,13},"spikes up2 1x1");
+        layout.put(new int[]{66,13},"spikes up2 1x1");
+
+        // ledge 67,9
+
+        layout.put(new int[]{66,9},"leftvine2 1x1");
+        layout.put(new int[]{66,10},"leftvine3 1x1");
+        layout.put(new int[]{66,11},"leftvine1 1x1");
+        layout.put(new int[]{66,12},"leftvine2 1x1");
+        layout.put(new int[]{66,13},"leftvine2 1x1");
+
+        layout.put(new int[]{67,9},"c1 top left 1x1");
+        layout.put(new int[]{68,9},"orange grass 3x1");
+
+        layout.put(new int[]{67,10},"dark 1x1");
+        layout.put(new int[]{68,10},"dark 1x1");
+        layout.put(new int[]{69,10},"rect2 2x1");
+
+        layout.put(new int[]{67,11},"orange rect 2x1");
+        layout.put(new int[]{69,11},"dark 1x1");
+        layout.put(new int[]{70,11},"dark 1x1");
+
+        layout.put(new int[]{67,12},"dark 1x1");
+        layout.put(new int[]{68,12},"dark 1x1");
+        layout.put(new int[]{69,12},"dark+vine 1x1");
+        layout.put(new int[]{70,12},"dark 1x1");
+
+        layout.put(new int[]{67,13},"rect 3x1");
+        layout.put(new int[]{70,13},"dark 1x1");
+
+        // tree 67, 0
+        layout.put(new int[]{67,0},"tree 7x9");
+        
         // collision matrix
-        //   0  1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43   
+        //   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70   
         collision_matrix = new int[][] {    
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 0
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 1
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 2
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0}, // 3
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0}, // 4
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 5
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1}, // 6
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1}, // 7
-            {0, 0,  0,  0,  0,  0,  1,  1,  1,  0,  0,  1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 8
-            {0, 0,  0,  0,  0,  0,  1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 9
-            {0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 10
-            {1, 1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 11
-            {1, 1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 12
-            {1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} // 13
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 0
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 1
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 2
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 3
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 4
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 5
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 6
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 7
+            {0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 8
+            {0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}, // 9
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}, // 10
+            {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}, // 11
+            {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}, // 12
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}  // 13
         };
         }
 }
